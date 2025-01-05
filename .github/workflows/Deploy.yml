@@ -29,6 +29,8 @@ jobs:
 
               git pull origin master -f
 
+              echo "${{ secrets.SERVER_ENV_PROD }}" > .env
+
               docker compose -f docker-compose.prod.yml up --build --detach
 
               docker ps -a
