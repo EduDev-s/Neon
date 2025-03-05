@@ -45,7 +45,7 @@ async def GetScheduleCall(body: Core, request: Request):
 
 
 @router.get('/GetScheduleExam', summary='Get schedule exams')
-async def GetScheduleCall(body: Core, request: Request):
+async def GetScheduleExam(body: Core, request: Request):
     if (await utils.CheckUserID(body.UserID, body.UserID)) is not None:
         return await utils.CheckUserID(body.UserID, body.UserID)
     if not (await utils.GetPermissions(body.UserID)).schedule_exam.use:

@@ -170,7 +170,7 @@ async def schedule_exam(callback: CallbackQuery):
             text = text + format_text + '\n'
 
     await callback.message.edit_text(text,
-        reply_markup=InlineKeyboardMarkup(row_width=1, inline_keyboard=[[__BACK_IN_MAIN_MENU__]]))
+                                     reply_markup=InlineKeyboardMarkup(row_width=1, inline_keyboard=[[__BACK_IN_MAIN_MENU__]]))
 
 
 @router.callback_query(F.data.startswith('schedule:nftadmins'))

@@ -92,4 +92,3 @@ async def GetScheduleExam(
 
     except httpx.HTTPStatusError as http_status_error:
         raise http_status_error
-
