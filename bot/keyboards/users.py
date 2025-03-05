@@ -37,6 +37,9 @@ async def GenStart(user_id: int) -> InlineKeyboardMarkup:
     if (await utils.GetPermissions(user_id)).schedule_call.use:
         buttons.append([InlineKeyboardButton(text='Расписание звонков 🕝', callback_data='schedule:recess')])
 
+    if (await utils.GetPermissions(user_id)).schedule_exam.use:
+        buttons.append([InlineKeyboardButton(text='Расписание экзаменов 🎯', callback_data='schedule:exam')])
+
     if (
             (await utils.GetPermissions(user_id)).admin_panel.use.server_status or
             (await utils.GetPermissions(user_id)).admin_panel.use.newsletter or

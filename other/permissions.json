@@ -1,6 +1,6 @@
 {
     "permissions": {
-        
+
         "lessons": {
             "use": {
                     "value": true,
@@ -41,6 +41,17 @@
             "edit": {
                 "value": false,
                 "description": "Изменять расписание звонков"
+            }
+        },
+
+        "schedule_exam": {
+            "use":  {
+                "value": true,
+                "description": "Использовать 'Расписание экзаменов'"
+            },
+            "edit": {
+                "value": false,
+                "description": "Изменять расписание экзаменов"
             }
         },
 

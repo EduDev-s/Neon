@@ -37,7 +37,7 @@ async def main() -> None:
     dp.include_router(core.GetRouter())
 
     log.info(user_id=None, msg='The bot is running !')
-    await NotificationAdmins('⚠ Бот запущен! ⚠', bot, InlineKeyboardMarkup(inline_keyboard=[[__BACK_IN_MAIN_MENU__]]))
+    await NotificationAdmins(f'⚠️ Бот запущен!\n\n⚙️ {config.RELEASE}', bot, InlineKeyboardMarkup(inline_keyboard=[[__BACK_IN_MAIN_MENU__]]))
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot, polling_timeout=60)

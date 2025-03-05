@@ -72,3 +72,24 @@ async def GetScheduleCall(
 
     except httpx.HTTPStatusError as http_status_error:
         raise http_status_error
+
+
+async def GetScheduleExam(
+            user_id: int,
+            requests_timeout: int = None
+        ) -> dict[str, str | dict] | FileNotFoundError | httpx.HTTPStatusError:
+    requester = _wrapped_client.make_requester(requests_timeout)
+
+    try:
+        response: httpx.Response = await requester(_wrapped_client.client.build_request(
+            method='GET',
+            url='GetScheduleExam',
+            json=RData(user_id).data
+        ))
+
+        if response.status_code == httpx.codes.OK:
+            return response.json()
+
+    except httpx.HTTPStatusError as http_status_error:
+        raise http_status_error
+

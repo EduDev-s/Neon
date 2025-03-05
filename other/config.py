@@ -1,3 +1,4 @@
+from datetime import datetime
 from enum import IntEnum, unique
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -73,8 +74,25 @@ class CONFIG(BaseSettings):
         {'start_time': '13.30', 'end_time': '14.10'},
         {'start_time': '14.15', 'end_time': '14.55'}
     ]
+    SCHEDULE_EXAM: list[dict[str, str]] = [
+        {'Иностранные языки': datetime(2025, 5, 21).strftime('%Y:%m:%d')},
+        {'Иностранные языки': datetime(2025, 5, 22).strftime('%Y:%m:%d')},
+        {'Биология, информатика, обществознание, химия': datetime(2025, 5, 26).strftime('%Y:%m:%d')},
+        {'География, история, физика, химия': datetime(2025, 5, 29).strftime('%Y:%m:%d')},
+        {'Математика': datetime(2025, 6, 3).strftime('%Y:%m:%d')},
+        {'География, информатика, обществознание': datetime(2025, 6, 6).strftime('%Y:%m:%d')},
+        {'Русский язык': datetime(2025, 6, 9).strftime('%Y:%m:%d')},
+        {'Биология, информатика, литература, физика': datetime(2025, 6, 16).strftime('%Y:%m:%d')},
+        {'Резерв': datetime(2025, 6, 26).strftime('%Y:%m:%d')},
+        {'Резерв': datetime(2025, 6, 27).strftime('%Y:%m:%d')},
+        {'Резерв': datetime(2025, 6, 28).strftime('%Y:%m:%d')},
+        {'Резерв': datetime(2025, 6, 30).strftime('%Y:%m:%d')},
+        {'Резерв': datetime(2025, 7, 1).strftime('%Y:%m:%d')},
+        {'Резерв': datetime(2025, 7, 2).strftime('%Y:%m:%d')},
+    ]
 
     model_config = SettingsConfigDict()
+
 
     def GetRelease(self) -> str:
         return str(f'Release {self.VERSION_MAJOR}.{self.VERSION_MINOR}.{self.VERSION_PATCH} [{self.VERSION_TYPE}]')

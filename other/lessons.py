@@ -1,7 +1,6 @@
 import other.log.colors as colors
 import other.log.logging as logging
 
-
 class Lessons:
     log: logging.logging = None
 
@@ -23,9 +22,9 @@ class Lessons:
         ['technology', 'Технология'],
         ['physics', 'Физика'],
         ['chemistry', 'Химия'],
-        ['russian_lang_addon', 'Русский язык (Доп)'],
-        ['literature_addon', 'Литература (Доп)']
+        ['russian_lang_addon', 'Русский язык (Доп)']
     ], key=lambda x: x[1])
+
 
     def __init__(self) -> None:
         self.log = logging.logging(Name='LESSONS', Color=colors.blue)
@@ -34,6 +33,7 @@ class Lessons:
             self.number_lessons += 1
             self.log.init(f'Load lesson {lesson[0]} : \'{lesson[1]}\'')
         self.log.init(f'Loaded {self.number_lessons} lessons')
+
 
     async def GetName(self, id: str) -> str | NameError:
         for id_ in self.lessons:

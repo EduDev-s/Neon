@@ -44,6 +44,16 @@ async def GetScheduleCall(body: Core, request: Request):
     return JSONResponse(status_code=status.HTTP_200_OK, content={'schedule_call': config.SCHEDULE_CALL})
 
 
+@router.get('/GetScheduleExam', summary='Get schedule exams')
+async def GetScheduleCall(body: Core, request: Request):
+    if (await utils.CheckUserID(body.UserID, body.UserID)) is not None:
+        return await utils.CheckUserID(body.UserID, body.UserID)
+    if not (await utils.GetPermissions(body.UserID)).schedule_exam.use:
+        return await utils.Error403(request, body.UserID)
+
+    return JSONResponse(status_code=status.HTTP_200_OK, content={'schedule_exam': config.SCHEDULE_EXAM})
+
+
 @router.post('/UpdateSchedule', summary='Set lessons')
 async def UpdateSchedule(body: EditScheduleBody, request: Request):
     if (await utils.CheckUserID(body.UserID, body.UserID)) is not None:

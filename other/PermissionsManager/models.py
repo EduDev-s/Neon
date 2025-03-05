@@ -53,6 +53,12 @@ class ScheduleCall(PermissionsMetaSchema):
 
 
 @dataclass
+class ScheduleExam(PermissionsMetaSchema):
+    use: Permission = field(metadata=dict(data_key='use'))
+    edit: Permission = field(metadata=dict(data_key='edit'))
+
+
+@dataclass
 class AdminPanelUse(PermissionsMetaSchema):
     server_status: Permission = field(metadata=dict(data_key='server_status'))
     newsletter: Permission = field(metadata=dict(data_key='newsletter'))
@@ -69,6 +75,7 @@ class Permissions(PermissionsMetaSchema):
     lessons: Lessons = field(metadata=dict(data_key='lessons'))
     schedule: Schedule = field(metadata=dict(data_key='schedule'))
     schedule_call: ScheduleCall = field(metadata=dict(data_key='schedule_call'))
+    schedule_exam: ScheduleExam = field(metadata=dict(data_key='schedule_exam'))
     admin_panel: AdminPanel = field(metadata=dict(data_key='admin_panel'))
     admin: Permission = field(metadata=dict(data_key='admin'))
 

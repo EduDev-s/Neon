@@ -1,4 +1,6 @@
+from datetime import datetime
 from time import strftime, localtime
+from dateutil.relativedelta import relativedelta
 
 from aiogram import F
 from aiogram.fsm.context import FSMContext
@@ -138,6 +140,37 @@ async def schedule_recess(callback: CallbackQuery):
             await callback.message.edit_text(f'{text}\n\nДо конца {status_text} осталось {time_to_end:.0f} минут', reply_markup=__SCHEDULE_RECESS__)
     except utils.TelegramBadRequest:
         await callback.answer("🔄 Обновлено")
+
+
+@router.callback_query(F.data.startswith('schedule:exam'))
+async def schedule_exam(callback: CallbackQuery):
+    if not (await utils.GetPermissions(callback.message.chat.id)).schedule_exam.use:
+        try:
+            await utils.RQReporter(c=callback)
+        except utils.AccessDeniedError:
+            return
+
+    def format_output(name: str, target_date: datetime, current_date: datetime):
+        delta = relativedelta(target_date, current_date)
+        months = delta.years * 12 + delta.months
+        days = delta.days
+        formatted_date = target_date.strftime("%d.%m.%Y")
+        return f"<b>{name}</b> осталось: {months} месяца {days} дня ({formatted_date})"
+
+    schedule_exam: list[dict[str, datetime]] = (await rq_schedule.GetScheduleExam(callback.message.chat.id))['schedule_exam']
+
+    current_date = datetime.now()
+    text: str = ''
+    log.debug(callback.message.chat.id, f'Current date: {current_date}')
+
+    for item in schedule_exam:
+        for name, date_str in item.items():
+            format_text = format_output(name, datetime.strptime(date_str, "%Y:%m:%d"), current_date)
+            log.debug(callback.message.chat.id, f'Text: {format_text}')
+            text = text + format_text + '\n'
+
+    await callback.message.edit_text(text,
+        reply_markup=InlineKeyboardMarkup(row_width=1, inline_keyboard=[[__BACK_IN_MAIN_MENU__]]))
 
 
 @router.callback_query(F.data.startswith('schedule:nftadmins'))

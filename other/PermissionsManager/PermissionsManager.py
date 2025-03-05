@@ -40,6 +40,7 @@ class PermissionsManager:
                 'lessons': p['permissions']['lessons'],
                 'schedule': p['permissions']['schedule'],
                 'schedule_call': p['permissions']['schedule_call'],
+                'schedule_exam': p['permissions']['schedule_exam'],
                 'admin_panel': p['permissions']['admin_panel'],
                 'admin': p['permissions']['admin']
             }
