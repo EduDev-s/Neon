@@ -1,16 +1,25 @@
+import hashlib
+from datetime import datetime
 from platform import system, python_version, release
 
 import psutil
 from aiogram import F
 from aiogram.fsm.context import FSMContext
 from aiogram.exceptions import TelegramForbiddenError, TelegramBadRequest
-from aiogram.types import CallbackQuery, Message, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import (
+    CallbackQuery,
+    Message,
+    InlineKeyboardMarkup,
+    InlineKeyboardButton,
+    BufferedInputFile
+)
 
 import utils
 from other.config import config
 import requests.roles as rq_roles
 import requests.users as rq_users
 from handlers.core import log, GetRouter
+import requests.admin_panel as rq_admin_panel
 from handlers.states.role_edit import FormRoleEdit
 from handlers.states.newsletter import FormNewsletter
 from handlers.states.role_create import FormRoleCreate
@@ -538,4 +547,41 @@ async def admin_panel_role_edit_users_input_user_id_or_username(message: Message
             [GenButtonBack(f'admin_panel:role:edit:{role_id}:users')],
             [__BACK_IN_MAIN_MENU__]
         ])
+    )
+
+
+@router.callback_query(F.data == 'admin_panel:database_backup')
+async def admin_panel_database_backup(callback: CallbackQuery):
+    if not (await utils.GetPermissions(callback.message.chat.id)).admin_panel.use.database_backup:
+        try:
+            await utils.RQReporter(c=callback)
+        except utils.AccessDeniedError:
+            return
+
+    await callback.message.edit_text(
+        '⚙️ Начато резервное копирование базы данных',
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[])
+    )
+
+    backup = await rq_admin_panel.CreateDatabaseBackup(callback.message.chat.id)
+
+    bif = BufferedInputFile(backup, filename=f'B-DB!ENC-K!{callback.message.chat.id}!{datetime.now().strftime('%d.%m.%Y_%H-%M-%S')}.dump.enc')
+
+    await callback.message.edit_text(
+        '⚙️ Выгружаю бэкап',
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[])
+    )
+
+    await callback.bot.send_chat_action(callback.message.chat.id, 'upload_document')
+
+    await callback.bot.send_document(
+        chat_id=callback.message.chat.id,
+        document=bif,
+        protect_content=True,
+        caption=f'SHA256: {hashlib.sha256(backup).hexdigest()}\nMD5: {hashlib.md5(backup).hexdigest()}'
+    )
+
+    await callback.message.edit_text(
+        '✅ Резервное копирование успешно завершено!',
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[[__BACK_IN_MAIN_MENU__]])
     )

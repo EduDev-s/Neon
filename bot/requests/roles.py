@@ -4,7 +4,7 @@ from requests.async_client_wrapper import _wrapped_client
 
 import requests.errors as errors
 from other.PermissionsManager.models import Permissions
-from requests.RequestsData import RequestsData as RData
+from requests.requests_data import RequestsData as RData
 from other.PermissionsManager.PermissionsManager import PM
 
 

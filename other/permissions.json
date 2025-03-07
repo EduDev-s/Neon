@@ -68,6 +68,10 @@
                 "role": {
                     "value": false,
                     "description": "Использовать: 'Управление ролями' в админ панели"
+                },
+                "database_backup": {
+                    "value": false,
+                    "description": "Использовать: 'Бэкап базы данных' в админ панели"
                 }
             }
         },

@@ -63,6 +63,7 @@ class AdminPanelUse(PermissionsMetaSchema):
     server_status: Permission = field(metadata=dict(data_key='server_status'))
     newsletter: Permission = field(metadata=dict(data_key='newsletter'))
     role: Permission = field(metadata=dict(data_key='role'))
+    database_backup: Permission = field(metadata=dict(data_key='database_backup'))
 
 
 @dataclass

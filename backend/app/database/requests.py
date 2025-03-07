@@ -1,5 +1,10 @@
+import asyncio
+import subprocess
+from concurrent.futures import ThreadPoolExecutor
+
 from xml.dom import NotFoundErr
 from sqlalchemy import select
+from sqlalchemy.engine import make_url
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
@@ -101,6 +106,52 @@ async def SyncRoles():
             await __SaveData(None, session)
         except Exception as Error:
             log.error(None, str(Error))
+
+
+async def Backup(user_id: int | None) -> str | Exception:
+    try:
+        log.warn(user_id, f'User {user_id} began backup database')
+
+        url = make_url(config.POSTGRES_URL)
+        host = url.host
+        port = url.port
+        database = url.database
+        username = url.username
+        password = url.password
+
+        command = [
+            'pg_dump',
+            '-h', host,
+            '-p', str(port),
+            '-U', username,
+            '-d', database,
+            '-Fp'
+        ]
+
+        # Запускаем синхронный процесс в отдельном потоке
+        loop = asyncio.get_event_loop()
+        with ThreadPoolExecutor() as pool:
+            process = await loop.run_in_executor(
+                pool,
+                lambda: subprocess.run(
+                    command,
+                    env={'PGPASSWORD': password},
+                    capture_output=True,
+                    text=True
+                )
+            )
+
+        if process.returncode == 0:
+            log.warn(user_id, 'Backup completed')
+            return process.stdout
+        else:
+            error = process.stderr.strip()
+            log.error(user_id, f'Backup failed: {error}')
+            raise Exception(f'Backup failed: {error}')
+
+    except Exception as error:
+        log.error(user_id, f'Backup error: {str(error)}')
+        raise error
 
 
 # SETTING

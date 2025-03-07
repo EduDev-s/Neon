@@ -2,7 +2,7 @@ import httpx
 
 import requests.errors as errors
 from requests.async_client_wrapper import _wrapped_client
-from requests.RequestsData import RequestsData as RData
+from requests.requests_data import RequestsData as RData
 
 
 async def GetSchedule(

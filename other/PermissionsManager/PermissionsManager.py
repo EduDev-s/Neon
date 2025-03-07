@@ -36,16 +36,8 @@ class PermissionsManager:
         try:
             self.log.debug(user_id, 'Convert JSON in Permissions is started')
 
-            data = {
-                'lessons': p['permissions']['lessons'],
-                'schedule': p['permissions']['schedule'],
-                'schedule_call': p['permissions']['schedule_call'],
-                'schedule_exam': p['permissions']['schedule_exam'],
-                'admin_panel': p['permissions']['admin_panel'],
-                'admin': p['permissions']['admin']
-            }
             permissions_schema = PermissionsSchema()
-            permissions_obj = permissions_schema.load(data)
+            permissions_obj = permissions_schema.load(p['permissions'])
 
             self.log.debug(user_id, 'Convert JSON in Permissions is completed')
             return permissions_obj

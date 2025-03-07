@@ -1,11 +1,13 @@
 from copy import copy
+from cryptography.fernet import Fernet
 
 from fastapi import status, Request
 from fastapi.responses import JSONResponse
 
-from other.lessons import Lessons
 import database.requests as rq
+from other.config import config
 import other.log.colors as colors
+from other.lessons import Lessons
 import other.log.logging as logging
 from other.PermissionsManager.models import Permissions
 from other.PermissionsManager.PermissionsManager import PM
@@ -43,6 +45,10 @@ async def GetPermissions(user_id: int) -> Permissions | Exception:
         return permission
     except Exception as Error:
         log.error(user_id, f'{Error}')
+
+
+def GetFernet() -> Fernet:
+    return Fernet(config.ENCRYPTION_KEY.encode())
 
 
 async def Error403(request: Request, user_id: int | str | None = None) -> JSONResponse:

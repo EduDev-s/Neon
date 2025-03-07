@@ -47,6 +47,7 @@ class CONFIG(BaseSettings):
     # Backend
     BACKEND_CONTAINER_NAME: str
     BACKEND_PORT: int
+    ENCRYPTION_KEY: str
     LOG_LEVEL: LogLevel
     LOG_FILE_NAME: str
     VERSION_MAJOR: str

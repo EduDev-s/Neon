@@ -15,6 +15,7 @@ from handlers.roles import router as roles_router
 from handlers.users import router as users_router
 from handlers.lessons import router as lessons_router
 from handlers.schedule import router as schedule_router
+from handlers.admin_panel import router as admin_panel_router
 
 
 logging.basicConfig(level=logging.INFO)
@@ -43,6 +44,7 @@ async def start() -> None:
     api_router.include_router(users_router)
     api_router.include_router(lessons_router)
     api_router.include_router(schedule_router)
+    api_router.include_router(admin_panel_router)
 
     app.include_router(api_router)
 

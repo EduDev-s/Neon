@@ -69,6 +69,9 @@ async def GenAdminPanel(user_id: int) -> InlineKeyboardMarkup:
     if (await utils.GetPermissions(user_id)).admin_panel.use.role:
         buttons.append([InlineKeyboardButton(text='Управление ролями ⚙️', callback_data='admin_panel:role')])
 
+    if (await utils.GetPermissions(user_id)).admin_panel.use.database_backup:
+        buttons.append([InlineKeyboardButton(text='Бэкап базы данных 📁', callback_data='admin_panel:database_backup')])
+
     buttons.append([__BACK_IN_MAIN_MENU__])
 
     return InlineKeyboardMarkup(row_width=1, inline_keyboard=buttons)
