@@ -10,14 +10,18 @@ RED = colorama.Fore.RED
 YELLOW = colorama.Fore.YELLOW
 RESET = colorama.Fore.RESET
 
+
 def print_success(message):
     print(f"{GREEN}[+] {message}{RESET}")
+
 
 def print_error(message):
     print(f"{RED}[-] {message}{RESET}")
 
+
 def print_warning(message):
     print(f"{YELLOW}[?] {message}{RESET}")
+
 
 def get_fernet(key: str) -> Fernet:
     try:
@@ -25,6 +29,7 @@ def get_fernet(key: str) -> Fernet:
     except ValueError as e:
         print_error(f"Неверный формат ключа: {e}")
         exit(1)
+
 
 def main():
     parser = argparse.ArgumentParser(description="Дешифратор файлов Fernet")
@@ -86,6 +91,7 @@ def main():
         print(result)
 
     print_success("Операция завершена успешно!")
+
 
 if __name__ == "__main__":
     main()
