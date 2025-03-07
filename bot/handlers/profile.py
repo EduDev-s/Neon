@@ -53,6 +53,7 @@ async def profile_notifications_off(callback: CallbackQuery):
         callback.from_user.first_name,
         callback.from_user.last_name,
         False,
+        False,
         [role['role_id'] for role in user['roles']]
     )
 
@@ -70,6 +71,7 @@ async def profile_notifications_on(callback: CallbackQuery):
         callback.from_user.username,
         callback.from_user.first_name,
         callback.from_user.last_name,
+        False,
         True,
         [role['role_id'] for role in user['roles']]
     )
