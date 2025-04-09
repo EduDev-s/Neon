@@ -10,9 +10,9 @@
 </div>
 
 <div>
-  <img src="https://img.shields.io/github/actions/workflow/status/NIKTO-IZ-NIOTKYDA/Nion/Lint.yml?branch=master&label=⚙️ Lint&style=flat-square&color=">
-  <img src="https://img.shields.io/github/actions/workflow/status/NIKTO-IZ-NIOTKYDA/Nion/Build.yml?branch=master&label=📑 Build&style=flat-square&color=">
-  <img src="https://img.shields.io/github/actions/workflow/status/NIKTO-IZ-NIOTKYDA/Nion/Deploy.yml?branch=master&label=🎉 Deploy&style=flat-square&color=">
+  <img src="https://img.shields.io/github/actions/workflow/status/NIKTO-IZ-NIOTKYDA/Nion/Lint.yml?branch=master&label=⚙️ Lint&style=flat-square">
+  <img src="https://img.shields.io/github/actions/workflow/status/NIKTO-IZ-NIOTKYDA/Nion/Build.yml?branch=master&label=📑 Build&style=flat-square">
+  <img src="https://img.shields.io/github/actions/workflow/status/NIKTO-IZ-NIOTKYDA/Nion/Deploy.yml?branch=master&label=🎉 Deploy&style=flat-square">
 </div>
 
 <div>
