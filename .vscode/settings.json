@@ -1,8 +1,0 @@
-{
-    "python.analysis.autoImportCompletions": true,
-    "discord.enable": true,
-    "cSpell.words": [],
-    "workbench.editor.autoLockGroups": {
-        "jsProfileVisualizer.cpuprofile.table": true
-    }
-}
