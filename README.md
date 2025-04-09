@@ -46,12 +46,12 @@ cp .env.template .env
 | `BOT_TOKEN`                  | Telegram bot token (from BotFather)                                     | `1234567890:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA` |
 | `NO_FOUND_HOMEWORK_MSG`      | Message when no homework is found                                       | `Не добавлено домашнее задание`              |
 | `TG_ID_OWNER`                | Bot owner's Telegram UserID                                             | `1234567890`                                 |
-| `TG_USERNAME_OWNER`          | Bot owner's Telegram username                                           | `UserName`                                   |
-| `TG_FIRST_NAME_OWNER`        | Bot owner's first name in Telegram                                      | `user`                                       |
+| `TG_USERNAME_OWNER`          | Bot owner's Telegram username                                           | *Empty*                                      |
+| `TG_FIRST_NAME_OWNER`        | Bot owner's first name in Telegram                                      | *Empty*                                      |
 | `TG_LAST_NAME_OWNER`         | Bot owner's last name in Telegram (optional)                            | *Empty*                                      |
-| `NAME_ROLE_OWNER`            | Owner role name                                                         | `Владелец`                                   |
+| `NAME_ROLE_OWNER`            | Owner role name                                                         | `Owner`                                      |
 | `ID_ROLE_OWNER`              | Unique owner role ID                                                    | `-1`                                         |
-| `NAME_ROLE_DEFAULT`          | Default user role name                                                  | `Пользователь`                               |
+| `NAME_ROLE_DEFAULT`          | Default user role name                                                  | `User`                                       |
 | `ID_ROLE_DEFAULT`            | Default user role ID                                                    | `0`                                          |
 | `REQUESTS_TIMEOUT`           | HTTP request timeout (seconds)                                          | `3`                                          |
 | `BACKEND_HOST`               | Backend host                                                            | `localhost`                                  |
